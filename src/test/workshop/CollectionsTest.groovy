@@ -57,6 +57,25 @@ class CollectionsTest extends GroovyTestCase {
         // ------------ STOP EDITING HERE  ----------------------
 
         assert burnedCalories == 2202
-
     }
+    
+    void test_05_accessingMaps() {
+        def map = [ 
+            cast: [
+                [ name: 'Fred Flintstone', voice_actor: 'Alan Reed' ],
+                [ name: 'Barney Rubble', voice_actor: 'Mel Blanc' ]
+            ]
+        ]
+        def first_actor = ''
+        def second_actor = ''
+        
+        // ------------ START EDITING HERE ----------------------
+        first_actor = map.cast[0].voice_actor
+        second_actor = map.cast[1].voice_actor
+        // ------------ STOP EDITING HERE  ----------------------
+        
+        assert first_actor == 'Alan Reed'
+        assert second_actor == 'Mel Blanc'
+    }
+    
 }
