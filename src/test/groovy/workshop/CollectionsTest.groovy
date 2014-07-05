@@ -1,4 +1,4 @@
-package test.workshop
+package workshop
 
 /**
  * Created by hmaass on 29.06.14.
@@ -10,7 +10,7 @@ class CollectionsTest extends GroovyTestCase {
         def steps = [2023, 12922, 3135, 7415, 8544]
         def stepsSum = 0
 
-        // Use the `each` function to sum up the steps
+        // Use the `each` method to sum up the steps
         // ------------ START EDITING HERE ----------------------
         steps.each { stepsSum += it }
         // ------------ STOP EDITING HERE  ----------------------
@@ -21,7 +21,7 @@ class CollectionsTest extends GroovyTestCase {
         def steps = [2023, 12922, 3135, 7415, 8544]
 
         def stepsSum
-        // Now use `sum` function to sum up the steps
+        // Now use `sum` method to sum up the steps
         // ------------ START EDITING HERE ----------------------
         stepsSum = steps.sum()
         // ------------ STOP EDITING HERE  ----------------------
@@ -35,7 +35,7 @@ class CollectionsTest extends GroovyTestCase {
 
         def stepsAboveGoal
 
-        // Now use `findAll` function to create a list of steps which
+        // Now use `findAll` method to create a list of steps which
         // are above the goal of 10000
 
         // ------------ START EDITING HERE ----------------------
@@ -51,15 +51,33 @@ class CollectionsTest extends GroovyTestCase {
         def burnedCalories = 0
         def caloriesPerStep = 0.05
 
-        // Use the `collect` method to transform the steps into calories
+        // Use the `collect` and `sum` method to transform the steps into calories
         // ------------ START EDITING HERE ----------------------
         burnedCalories = steps.collect { it * caloriesPerStep }.sum()
         // ------------ STOP EDITING HERE  ----------------------
 
         assert burnedCalories == 2202
     }
+
+    void test_05_calculateBurnedCaloriesUsingInject() {
+        def steps = [2023, 12922, 3135, 17416, 8544]
+        def burnedCalories = 0
+        def caloriesPerStep = 0.05
+
+        // Use the `inject` method to transform the steps into calories
+
+        // ------------ START EDITING HERE ----------------------
+
+        burnedCalories = steps.inject(0) { sum, element -> sum += element * caloriesPerStep}
+
+        // ------------ STOP EDITING HERE  ----------------------
+
+
+        assert burnedCalories == 2202
+
+    }
     
-    void test_05_accessingMaps() {
+    void test_06_accessingMaps() {
         def map = [ 
             cast: [
                 [ name: 'Fred Flintstone', voice_actor: 'Alan Reed' ],

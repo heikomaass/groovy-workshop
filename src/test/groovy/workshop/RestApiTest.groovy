@@ -2,7 +2,7 @@
 //@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.0-RC2')
 //@Grab(group='org.lightweightest', module='lightweightest', version='0.1')
 
-package test.workshop
+package workshop
 
 /**
  * Created by Max Trense on 01.07.2014

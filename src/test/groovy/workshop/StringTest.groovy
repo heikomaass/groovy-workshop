@@ -1,4 +1,4 @@
-package test.workshop
+package workshop
 
 /**
  * Created by hmaass on 26.06.14.
