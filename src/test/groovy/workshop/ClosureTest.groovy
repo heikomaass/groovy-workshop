@@ -6,6 +6,7 @@ package workshop
 class ClosureTest extends GroovyTestCase {
 
     void test_01_usingWith() {
+        // The `with` method allows you to do a bunch of things with the same object
         StringBuffer stringBuffer = new StringBuffer("Hello World")
         stringBuffer.with {
             append("!")
@@ -13,6 +14,7 @@ class ClosureTest extends GroovyTestCase {
             append("?")
         }
 
+        // So now it is your turn. What is the result of the statement above ?
         def expected
         // ------------ START EDITING HERE ----------------------
         expected = "!dlroW olleH?"
@@ -29,7 +31,7 @@ class ClosureTest extends GroovyTestCase {
             println "times: ${i}"
         }
         // Now we want to reimplement this functionality.
-        // Tip: use `delegate` to access the Integer value.
+        // Hint: use `delegate` property to access the Integer instance.
         Integer.metaClass.timesIWant = { closure ->
             // ------------ START EDITING HERE ----------------------
             for (int i = 0; i < delegate; i++) {
@@ -38,13 +40,31 @@ class ClosureTest extends GroovyTestCase {
             }
             // ------------ STOP EDITING HERE  ----------------------
         }
-
         10.timesIWant { i ->
             println "cookies: ${i}"
         }
     }
 
-    void test_03_switchingDelegate() {
+    void test_03_understandingIt() {
+        def result = 0
+        // Closures with a single argument, provide this argument as the implicit `it` reference.
+        10.times { i ->
+            result += i * 10
+        }
+
+        def resultFromRewrittenClosure = 0
+        // So rewrite the closure above using the implicit it reference
+        // ------------ START EDITING HERE ----------------------
+
+        10.times {
+            resultFromRewrittenClosure += it * 10
+        }
+
+        // ------------ STOP EDITING HERE  ----------------------
+        assert result == resultFromRewrittenClosure
+    }
+
+    void test_04_switchingDelegate() {
         // Closures come with three properties:
         // this:        instance of enclosing class, where the Closure is defined
         // owner:       enclosing object (this or surrounding Closure)
