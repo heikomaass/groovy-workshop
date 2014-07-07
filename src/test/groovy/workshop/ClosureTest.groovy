@@ -64,7 +64,7 @@ class ClosureTest extends GroovyTestCase {
         assert result == resultFromRewrittenClosure
     }
 
-    void test_04_switchingDelegate() {
+    void test_04_switchingDelegate_1() {
         // Closures come with three properties:
         // this:        instance of enclosing class, where the Closure is defined
         // owner:       enclosing object (this or surrounding Closure)
@@ -102,5 +102,44 @@ class ClosureTest extends GroovyTestCase {
         }
     }
 
+    void test_05_switchingDelegate_2() {
+        def data = [x: 10, y: 20]
+        def closure = {
+            y = x + y
+        }
+        // ------------ START EDITING HERE ----------------------
+        closure.delegate = data
+        // ------------ STOP EDITING HERE  ----------------------
+        closure()
+        assert data.y == 30
+    }
+
+
+    void test_06_nestingClosure() {
+        def outerClosure = {
+            def banana = 0;
+            // `this` refers to the `ClosureTest` instance.
+            // and it is the owner of the outerClosure.
+            assert owner == this
+
+            // when nothing is changed, the `owner` is the delegate.
+            // properties and methods will be dispatched to the delegate,
+            // if they are not provided in the closure itself.
+            assert owner == delegate
+
+            def innerClosure = {
+                // Now it's your turn. Find out what `owner`, `delegate` and `this` is
+                //
+                // ------------ START EDITING HERE ----------------------
+                assert this instanceof ClosureTest
+                assert owner != this
+                assert owner == delegate
+                // ------------ STOP EDITING HERE  ----------------------
+            }
+            innerClosure()
+        }
+        outerClosure();
+
+    }
 
 }
