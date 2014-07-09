@@ -1,8 +1,9 @@
-//@GrabResolver(name="lightweightest", m2Compatible='true', root='https://raw.github.com/dmitart/lightweightest/master/repository')
-//@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.0-RC2')
-//@Grab(group='org.lightweightest', module='lightweightest', version='0.1')
+package test.workshop
 
-package workshop
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7.2')
+import groovyx.net.http.*
+import static groovyx.net.http.ContentType.*
+import static groovyx.net.http.Method.*
 
 /**
  * Created by Max Trense on 01.07.2014
@@ -11,8 +12,26 @@ package workshop
 
 class RestApiTest extends GroovyTestCase {
 	
-	void test_01_ConnectingToHttpService() {
-		
+	void test_01_GettingData() {
+		def http = new HTTPBuilder('http://httpbin.org')
+		def responseBody = http.request(GET, TEXT) {
+	        // ------------ START EDITING HERE ----------------------
+			uri.path = '/user-agent'
+			headers.'User-Agent' = 'Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4'
+	        // ------------ STOP EDITING HERE  ----------------------
+		}
+		assert responseBody.readLines().join('\n') == '{\n  "user-agent": "Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4"\n}'
+	}
+	
+	void test_01_GettingJson() {
+		def http = new HTTPBuilder('http://httpbin.org')
+		def json = http.request(GET, JSON) {
+	        // ------------ START EDITING HERE ----------------------
+			uri.path = '/user-agent'
+			headers.'User-Agent' = 'Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4'
+	        // ------------ STOP EDITING HERE  ----------------------
+		}
+		assert json."user-agent" == 'Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4'
 	}
 	
 }
