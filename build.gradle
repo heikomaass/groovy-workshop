@@ -2,16 +2,20 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 
 repositories {
-    mavenCentral()
+    // disabling mavenCentral() repository, because
+    // the internet connection in the conference hotel won't be sufficient for Namics
+    // mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
-    compile 'org.codehaus.groovy:groovy-all:2.3.3'
-    testCompile 'junit:junit:4.11'
+    compile files(fileTree(dir:'lib', includes: ['*.jar']))
+
+    // compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+    // compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    // testCompile 'junit:junit:4.11'
 }
 
-/** taken from Groovy Koans */
+// shamelessly taken from Groovy Koans (http://groovykoans.org/)
 task removeSolutions << {
     def solutionsRemoved = 0
     def solutionRegex = $/(?sm)(// -{12} START EDITING HERE -{22})(.*?)(\s+// -{12} STOP EDITING HERE -{23})/$
@@ -19,5 +23,10 @@ task removeSolutions << {
         solutionsRemoved += (sourceFile.text =~ solutionRegex).count
         sourceFile.text = sourceFile.text.replaceAll(solutionRegex, '$1\n\n$3')
     }
-    println "Removed $solutionsRemoved solutions from Koans. Good luck!"
+    println "Removed $solutionsRemoved solutions from Groovy Workshop."
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/output/lib"
+    from configurations.runtime + configurations.testRuntime
 }
