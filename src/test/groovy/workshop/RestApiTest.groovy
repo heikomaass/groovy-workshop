@@ -18,7 +18,7 @@ class RestApiTest extends GroovyTestCase {
             // ------------ START EDITING HERE ----------------------
             uri.path = '/user-agent'
             headers.'User-Agent' = 'Fancy Useragent'
-            // ------------ STOP EDITING HERE  ----------------------
+            // ------------ STOP EDITING HERE -----------------------
         }
         assert responseBody.readLines().join('\n') == '{\n  "user-agent": "Fancy Useragent"\n}'
     }
@@ -29,7 +29,7 @@ class RestApiTest extends GroovyTestCase {
             // ------------ START EDITING HERE ----------------------
             uri.path = '/user-agent'
             headers.'User-Agent' = 'Fancy Useragent'
-            // ------------ STOP EDITING HERE  ----------------------
+            // ------------ STOP EDITING HERE -----------------------
         }
         assert json."user-agent" == 'Fancy Useragent'
     }

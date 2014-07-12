@@ -10,3 +10,14 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.3'
     testCompile 'junit:junit:4.11'
 }
+
+/** taken from Groovy Koans */
+task removeSolutions << {
+    def solutionsRemoved = 0
+    def solutionRegex = $/(?sm)(// -{12} START EDITING HERE -{22})(.*?)(\s+// -{12} STOP EDITING HERE -{23})/$
+    sourceSets.test.allSource.files.each { File sourceFile ->
+        solutionsRemoved += (sourceFile.text =~ solutionRegex).count
+        sourceFile.text = sourceFile.text.replaceAll(solutionRegex, '$1\n\n$3')
+    }
+    println "Removed $solutionsRemoved solutions from Koans. Good luck!"
+}

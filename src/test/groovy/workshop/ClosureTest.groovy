@@ -18,7 +18,7 @@ class ClosureTest extends GroovyTestCase {
         def expected
         // ------------ START EDITING HERE ----------------------
         expected = "!dlroW olleH?"
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert stringBuffer.toString() == expected;
     }
@@ -38,7 +38,7 @@ class ClosureTest extends GroovyTestCase {
                 print "I want "
                 closure(i)
             }
-            // ------------ STOP EDITING HERE  ----------------------
+            // ------------ STOP EDITING HERE -----------------------
         }
         10.timesIWant { i ->
             println "cookies: ${i}"
@@ -60,7 +60,7 @@ class ClosureTest extends GroovyTestCase {
             resultFromRewrittenClosure += it * 10
         }
 
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert result == resultFromRewrittenClosure
     }
 
@@ -78,14 +78,14 @@ class ClosureTest extends GroovyTestCase {
         // Hint: Use an instance of the B class
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new B()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert result == "B"
 
         // Hint: Use an instance of the A class
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new A()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert result == "A"
     }
@@ -109,7 +109,7 @@ class ClosureTest extends GroovyTestCase {
         }
         // ------------ START EDITING HERE ----------------------
         closure.delegate = data
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert data.y == 30
     }
@@ -134,7 +134,7 @@ class ClosureTest extends GroovyTestCase {
                 assert this instanceof ClosureTest
                 assert owner != this
                 assert owner == delegate
-                // ------------ STOP EDITING HERE  ----------------------
+                // ------------ STOP EDITING HERE -----------------------
             }
             innerClosure()
         }

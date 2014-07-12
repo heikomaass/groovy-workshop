@@ -33,7 +33,7 @@ class GroovyBeansTest extends GroovyTestCase {
         iThinkThatEmailSetterExists = true
         iThinkThatUidSetterExists = false
         customer.email = "John_Doe@namics.com"
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert customer.email == "John_Doe@namics.com"
         assert hasEmailSetter == iThinkThatEmailSetterExists
@@ -67,7 +67,7 @@ class GroovyBeansTest extends GroovyTestCase {
                 return sameDay(now, delegate.cart.created_at)
             }
             false
-            // ------------ STOP EDITING HERE  ----------------------
+            // ------------ STOP EDITING HERE -----------------------
 
         }
         Customer hans = new Customer(name: "Hans")
