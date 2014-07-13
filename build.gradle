@@ -15,9 +15,16 @@ dependencies {
     // testCompile 'junit:junit:4.11'
 }
 
+task copySourceToSolutions(type: Copy) {
+    def targetDir = "$buildDir/output/solutions"
+    println "Copying solutions to $targetDir"
+    into targetDir
+    from sourceSets.test.allSource
+}
+
 // Removes all solutions, so that the participant can start to solve the tests.
 // shamelessly taken from Groovy Koans (http://groovykoans.org/)
-task removeSolutions << {
+task removeSolutions(dependsOn:copySourceToSolutions) << {
     def solutionsRemoved = 0
     def solutionRegex = $/(?sm)(// -{12} START EDITING HERE -{22})(.*?)(\s+// -{12} STOP EDITING HERE -{23})/$
     sourceSets.test.allSource.files.each { File sourceFile ->
@@ -27,8 +34,10 @@ task removeSolutions << {
     println "Removed $solutionsRemoved solutions from Groovy Workshop."
 }
 
+
+
 // Fetches all dependencies (runtime, testRuntime) and copies them to output/lib folder.
-task copyToLib(type: Copy) {
+task copyDependenciesToLib(type: Copy) {
     into "$buildDir/output/lib"
     from configurations.runtime + configurations.testRuntime
 }
