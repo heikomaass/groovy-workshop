@@ -15,6 +15,7 @@ dependencies {
     // testCompile 'junit:junit:4.11'
 }
 
+// Removes all solutions, so that the participant can start to solve the tests.
 // shamelessly taken from Groovy Koans (http://groovykoans.org/)
 task removeSolutions << {
     def solutionsRemoved = 0
@@ -26,6 +27,7 @@ task removeSolutions << {
     println "Removed $solutionsRemoved solutions from Groovy Workshop."
 }
 
+// Fetches all dependencies (runtime, testRuntime) and copies them to output/lib folder.
 task copyToLib(type: Copy) {
     into "$buildDir/output/lib"
     from configurations.runtime + configurations.testRuntime

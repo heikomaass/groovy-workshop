@@ -17,7 +17,7 @@ class GroovyBeansTest extends GroovyTestCase {
     }
 
     void test_01_customerHasGeneratedSetter() {
-        // We can set properties directly in the constructor
+        // Groovy allows the setting of properties directly in the constructor
         Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")
 
         // Let's test if setters are automatically created
@@ -57,7 +57,7 @@ class GroovyBeansTest extends GroovyTestCase {
         // The method should return true when the customer has created a cart today.
         Customer.metaClass.createdCartToday = { ->
 
-            // Hints:
+            // Hint:
             // The customer can be referenced by `delegate`.
             // Reuse the `sameDay` method.
             // ------------ START EDITING HERE ----------------------
