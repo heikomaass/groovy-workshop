@@ -1,6 +1,5 @@
 package test.workshop
 
-@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7.2')
 import groovyx.net.http.*
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
