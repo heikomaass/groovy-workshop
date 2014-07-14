@@ -10,17 +10,15 @@ class ClosureTest extends GroovyTestCase {
         StringBuffer stringBuffer = new StringBuffer("Hello World")
         stringBuffer.with {
             append("!")
+
+            // ------------ START EDITING HERE ----------------------
             reverse()
             append("?")
+            // ------------ STOP EDITING HERE -----------------------
         }
 
-        // So now it is your turn. What is the result of the statement above ?
-        def expected
-        // ------------ START EDITING HERE ----------------------
-        expected = "!dlroW olleH?"
-        // ------------ STOP EDITING HERE  ----------------------
 
-        assert stringBuffer.toString() == expected;
+        assert stringBuffer.toString() == "!dlroW olleH?";
     }
 
     void test_02_writeOwnMethodThatAcceptsClosure() {
@@ -38,7 +36,7 @@ class ClosureTest extends GroovyTestCase {
                 print "I want "
                 closure(i)
             }
-            // ------------ STOP EDITING HERE  ----------------------
+            // ------------ STOP EDITING HERE -----------------------
         }
         10.timesIWant { i ->
             println "cookies: ${i}"
@@ -47,20 +45,20 @@ class ClosureTest extends GroovyTestCase {
 
     void test_03_understandingIt() {
         def result = 0
-        // Closures with a single argument, provide this argument as the implicit `it` reference.
+        // Closures with a single argument provide the argument as the implicit `it` reference.
+
+        // The next closure doesn't use this feature. It declares the i reference in the closure signature.
         10.times { i ->
             result += i * 10
         }
 
+        // So rewrite the closure above using the implicit `it` reference
         def resultFromRewrittenClosure = 0
-        // So rewrite the closure above using the implicit it reference
         // ------------ START EDITING HERE ----------------------
-
         10.times {
             resultFromRewrittenClosure += it * 10
         }
-
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert result == resultFromRewrittenClosure
     }
 
@@ -78,14 +76,14 @@ class ClosureTest extends GroovyTestCase {
         // Hint: Use an instance of the B class
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new B()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert result == "B"
 
         // Hint: Use an instance of the A class
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new A()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert result == "A"
     }
@@ -109,7 +107,7 @@ class ClosureTest extends GroovyTestCase {
         }
         // ------------ START EDITING HERE ----------------------
         closure.delegate = data
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         closure()
         assert data.y == 30
     }
@@ -134,7 +132,7 @@ class ClosureTest extends GroovyTestCase {
                 assert this instanceof ClosureTest
                 assert owner != this
                 assert owner == delegate
-                // ------------ STOP EDITING HERE  ----------------------
+                // ------------ STOP EDITING HERE -----------------------
             }
             innerClosure()
         }

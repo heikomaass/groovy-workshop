@@ -20,7 +20,7 @@ class StringTest extends GroovyTestCase {
         welcomeString = 'Welcome to ${name}'
         welcomeGString = "Welcome to ${conference}"
 
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert welcomeString == 'Welcome to ${name}'
         assert welcomeGString == "Welcome to Namics Conference"
@@ -42,7 +42,7 @@ class StringTest extends GroovyTestCase {
         // ------------ START EDITING HERE ----------------------
         expectedEqual1 = true
         expectedEqual2 = false
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert equal1 == expectedEqual1
         assert equal2 == expectedEqual2
@@ -57,7 +57,7 @@ class StringTest extends GroovyTestCase {
 
         // ------------ START EDITING HERE ----------------------
         corrected -= " Conference "
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert corrected == "Welcome to Namics"
     }
 
@@ -74,7 +74,7 @@ class StringTest extends GroovyTestCase {
 
         // ------------ START EDITING HERE ----------------------
         iThinkOutputWillBe = "abacad"
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert output == iThinkOutputWillBe
     }

@@ -35,7 +35,7 @@ class UsingJsonTest extends GroovyTestCase {
 		assert json.contains('Heiko Maa\\u00df')
 		assert json.contains('Max Trense')
 	}
-	
-	
+
+
 	
 }

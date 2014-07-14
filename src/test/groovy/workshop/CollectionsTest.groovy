@@ -13,7 +13,7 @@ class CollectionsTest extends GroovyTestCase {
         // Use the `each` method to sum up the steps
         // ------------ START EDITING HERE ----------------------
         steps.each { stepsSum += it }
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert stepsSum == 34039
     }
 
@@ -24,7 +24,7 @@ class CollectionsTest extends GroovyTestCase {
         // Now use `sum` method to sum up the steps
         // ------------ START EDITING HERE ----------------------
         stepsSum = steps.sum()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert stepsSum == 34039
     }
@@ -42,7 +42,7 @@ class CollectionsTest extends GroovyTestCase {
         stepsAboveGoal = steps.findAll {
             it > goal
         }
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert stepsAboveGoal.size() == 2
     }
 
@@ -54,7 +54,7 @@ class CollectionsTest extends GroovyTestCase {
         // Use the `collect` and `sum` method to transform the steps into calories
         // ------------ START EDITING HERE ----------------------
         burnedCalories = steps.collect { it * caloriesPerStep }.sum()
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert burnedCalories == 2202
     }
@@ -67,7 +67,7 @@ class CollectionsTest extends GroovyTestCase {
         // Use the `inject` method to transform the steps into calories
         // ------------ START EDITING HERE ----------------------
         burnedCalories = steps.inject(0) { sum, element -> sum += element * caloriesPerStep }
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert burnedCalories == 2202
     }
@@ -85,7 +85,7 @@ class CollectionsTest extends GroovyTestCase {
         // ------------ START EDITING HERE ----------------------
         first_actor = map.cast[0].voice_actor
         second_actor = map.cast[1].voice_actor
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert first_actor == 'Alan Reed'
         assert second_actor == 'Mel Blanc'
@@ -112,7 +112,7 @@ class CollectionsTest extends GroovyTestCase {
         castContainsDino = cast.any { name, voice_actor ->
             name.contains("Dino")
         }
-        // ------------ STOP EDITING HERE  ----------------------
+        // ------------ STOP EDITING HERE -----------------------
 
         assert castContainsRubble == true
         assert castContainsDino == false
