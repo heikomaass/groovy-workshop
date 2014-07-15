@@ -4,32 +4,46 @@ In our opinion you only learn languages if you play with them. Only consuming Po
 So this workshop will allow you to learn Groovy syntax and concepts by making testcases pass. 
 
 Please note that this workshop is heavily inspired by the [Groovy Koans](http://groovykoans.org/),
-but provides a slightly different structure and scope.  
+but provides a slightly different structure and scope.
 
 ## Installation
-###  Workshop Requirements
-- Download and extract [Gradle 2.0](https://services.gradle.org/distributions/gradle-2.0-bin.zip)
 
-### Optional (but recommended)
-- Download and extract [Groovy 2.3.3](http://dl.bintray.com/groovy/maven/groovy-binary-2.3.3.zip)
+### 1. Install Gradle
+- Download [Gradle 2.0](https://services.gradle.org/distributions/gradle-2.0-bin.zip)
+- Extract that folder (e.g to ~/sdk/gradle) and make sure that the `bin` folder it is in your `PATH` environment variable.
+
+    export PATH=${PATH}:~/sdk/gradle/bin
+
+### 2. Install IntelliJ
 - Download and install [IntelliJ 13 CE](http://www.jetbrains.com/idea/download/)
 
-(Groovy 2.3.3 already comes as jar-file in the `/lib` folder)
+Groovy 2.3.3 already comes as jar-file in the `/lib` folder
 
-### Create IntelliJ project
+### 3. Create IntelliJ project
 Create an IntelliJ project using this gradle command 
 
     gradle idea
 
-After that you can open this project folder in IntelliJ
+After that you can open this project folder in IntelliJ.
 
-### Remove solutions
+### 4. Remove solutions
 Before you start the workshop please remove the solutions in the code.
 Just execute
 
     gradle removeSolutions
     
 The solutions for the tests are copied into `output/solutions`.
+
+### 5. Execute tests
+In order to start the tests you may use gradle.
+
+    gradle test
+
+In IntelliJ you can right click on the `src/test` folder and choose `Run All Tests`.
+![Run all tests](./img/run_all_tests.png)
+
+### 6. Fix tests
+Make the tests pass.
 
 
 
