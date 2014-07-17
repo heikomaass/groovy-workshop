@@ -8,15 +8,19 @@ class ClosureTest extends GroovyTestCase {
     void test_01_usingWith() {
         // The `with` method allows you to do a bunch of things with the same object
         StringBuffer stringBuffer = new StringBuffer("Hello World")
+
         stringBuffer.with {
             append("!")
+        }
+        assert stringBuffer.toString() == "Hello World!"
 
+        // Now it's your turn, modify the StringBuffer, so that the next assert will pass.
+        stringBuffer.with {
             // ------------ START EDITING HERE ----------------------
             reverse()
             append("?")
             // ------------ STOP EDITING HERE -----------------------
         }
-
 
         assert stringBuffer.toString() == "!dlroW olleH?";
     }
@@ -25,9 +29,13 @@ class ClosureTest extends GroovyTestCase {
         // In Groovy (and Ruby) there is a method on Integer called `times`
         // which executes the given closure n-times.
         // Example:
+        def timesCalled = 0
         10.times { i ->
             println "times: ${i}"
+            timesCalled++;
         }
+        assert timesCalled == 10
+
         // Now we want to reimplement this functionality.
         // Hint: use `delegate` property to access the Integer instance.
         Integer.metaClass.timesIWant = { closure ->
@@ -38,16 +46,18 @@ class ClosureTest extends GroovyTestCase {
             }
             // ------------ STOP EDITING HERE -----------------------
         }
+        timesCalled = 0;
         10.timesIWant { i ->
             println "cookies: ${i}"
+            timesCalled++;
         }
+        assert timesCalled == 10
     }
 
     void test_03_understandingIt() {
-        def result = 0
         // Closures with a single argument provide the argument as the implicit `it` reference.
-
-        // The next closure doesn't use this feature. It declares the i reference in the closure signature.
+        // The next closure doesn't use this feature. It explicitly declares the `i` reference in the closure signature.
+        def result = 0
         10.times { i ->
             result += i * 10
         }
@@ -65,22 +75,22 @@ class ClosureTest extends GroovyTestCase {
     void test_04_switchingDelegate_1() {
         // Closures come with three properties:
         // this:        instance of enclosing class, where the Closure is defined
-        // owner:       enclosing object (this or surrounding Closure)
-        // delegate:    defaults to owner, but is changeable
+        // owner:       enclosing object (`this` or surrounding Closure)
+        // delegate:    defaults to `owner, but is changeable
         def result = "";
 
         def closure = {
             result = message()
         }
 
-        // Hint: Use an instance of the B class
+        // Set the delegate, so that the message() call will reach an instance of the B class.
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new B()
         // ------------ STOP EDITING HERE -----------------------
         closure()
         assert result == "B"
 
-        // Hint: Use an instance of the A class
+        // Now change the delegate, so that the message() call will reach an instance of the A class.
         // ------------ START EDITING HERE ----------------------
         closure.delegate = new A()
         // ------------ STOP EDITING HERE -----------------------
@@ -126,7 +136,7 @@ class ClosureTest extends GroovyTestCase {
             assert owner == delegate
 
             def innerClosure = {
-                // Now it's your turn. Find out what `owner`, `delegate` and `this` is
+                // Now it's your turn. Find out what `owner`, `delegate` and `this` refer to.
                 //
                 // ------------ START EDITING HERE ----------------------
                 assert this instanceof ClosureTest
