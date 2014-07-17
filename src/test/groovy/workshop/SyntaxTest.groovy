@@ -22,7 +22,11 @@ class SyntaxTest extends GroovyTestCase {
             position[0] += x
             position[1] += y
         }
-
+        def positionAsString() {
+            // ------------ START EDITING HERE ----------------------
+            "${position[0]},${position[1]}"
+            // ------------ STOP EDITING HERE -----------------------
+        }
     }
 
     void test_01_noSemicolonsNeeded() {
@@ -59,9 +63,8 @@ class SyntaxTest extends GroovyTestCase {
         assert car1.position[0] == 12
         assert car1.position[1] == 15
 
-        def car2 = new Car();
         // Groovy allows to omit the parenthesis if there is at least one parameter and no ambiguity
-
+        def car2 = new Car()
         // ------------ START EDITING HERE ----------------------
         car2.start()
         car2.move 2,3
@@ -72,6 +75,20 @@ class SyntaxTest extends GroovyTestCase {
 
         assert car2.position[0] == 12
         assert car2.position[1] == 15
-
     }
+
+    void test_03_noReturnIsNeeded() {
+        def car = new Car()
+        car.move(4,3)
+
+        // Implement the `positionAsString` method and don't use a `return` statement, it may be omitted.
+        assert car.positionAsString() == "4,3"
+    }
+
+
+
+
+
+
+
 }
