@@ -1,5 +1,7 @@
 package workshop
 
+import workshop.model.Customer
+
 /**
  * User: hmaass
  * Date: 17.07.14
@@ -83,6 +85,14 @@ class SyntaxTest extends GroovyTestCase {
 
         // Implement the `positionAsString` method and don't use a `return` statement, it may be omitted.
         assert car.positionAsString() == "4,3"
+    }
+
+    void test_04_defaultPropertiesInConstructor() {
+        // Groovy allows the setting of properties directly in the constructor
+        Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")
+
+
+
     }
 
 

@@ -18,7 +18,6 @@ class OperatorsTest extends GroovyTestCase {
         // ------------ STOP EDITING HERE -----------------------
     }
 
-
     void test_01_operatorOverloading() {
         // Operators can be overloaded. See http://groovy.codehaus.org/Operator+Overloading
         def i = 2.plus(3);
@@ -31,7 +30,5 @@ class OperatorsTest extends GroovyTestCase {
         // Now add an own `plus` method in the `Spice` class
         Spice combined = peperoni + tabasco + habaneros
         assert combined.scoville == 105500
-
-
     }
 }

@@ -1,43 +1,27 @@
 package workshop
 
+import workshop.model.Cart
+import workshop.model.Customer
+
 /**
  * Created by hmaass on 28.06.14.
  * heavily inspired from http://groovykoans.org/
  */
 
 class GroovyBeansTest extends GroovyTestCase {
-    static class Customer {
-        String email
-        String name
-        Cart cart
-    }
-
-    static class Cart {
-        Date created_at
-    }
 
     void test_01_customerHasGeneratedSetter() {
-        // Groovy allows the setting of properties directly in the constructor
         Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")
+        assert customer.email == "JohnDoe@namics.com"
+        assert customer.name == "John"
 
-        // Let's test if setters are automatically created
-        def setEmail = customer.metaClass.getMetaMethod("setEmail")
-        def setUid = customer.metaClass.getMetaMethod("setUid")
-
-        def hasEmailSetter = setEmail != null
-        def hasUidSetter = setUid != null
-
-        def iThinkThatEmailSetterExists
-        def iThinkThatUidSetterExists
+        // Use the generated setter methods to make the asserts pass.
         // ------------ START EDITING HERE ----------------------
-        iThinkThatEmailSetterExists = true
-        iThinkThatUidSetterExists = false
-        customer.email = "John_Doe@namics.com"
+        customer.setEmail("SusanDoe@namics.com")
+        customer.setName("Susan")
         // ------------ STOP EDITING HERE -----------------------
+        assert customer.email == "SusanDoe@namics.com"
 
-        assert customer.email == "John_Doe@namics.com"
-        assert hasEmailSetter == iThinkThatEmailSetterExists
-        assert hasUidSetter == iThinkThatUidSetterExists
     }
 
     void test_02_safeNavigationOperator() {
@@ -57,7 +41,6 @@ class GroovyBeansTest extends GroovyTestCase {
         // The method should return true when the customer has created a cart today.
         Customer.metaClass.createdCartToday = { ->
 
-            // Hint:
             // The customer can be referenced by `delegate`.
             // Reuse the `sameDay` method.
             // ------------ START EDITING HERE ----------------------
