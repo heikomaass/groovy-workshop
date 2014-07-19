@@ -51,8 +51,7 @@ class StringTest extends GroovyTestCase {
     void test_03_StringMinus() {
         def welcome = "Welcome to Namics Conference Hotel"
 
-        // Groovy supports Operator Overloading.
-        //
+        // The GString class overloads the minus operator.
         def corrected = welcome - "Hotel"
 
         // ------------ START EDITING HERE ----------------------
