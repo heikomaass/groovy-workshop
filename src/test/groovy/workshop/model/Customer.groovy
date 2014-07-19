@@ -9,9 +9,23 @@ class Customer {
     Integer uid
     String email
     String name
+    private Date birthDate;
+
     Cart cart
 
-    // returns `true` when the cart was created today.
+    // Fixing GroovyBeansTest: Add setter / getter for birthDate property
+    // ------------ START EDITING HERE ----------------------
+    public void setBirthDate(Date date) {
+        this.birthDate = date
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    // ------------ STOP EDITING HERE -----------------------
+
+    // Fixing OperatorsTest: Implement createdCartToday method
+    // which returns `true` when the cart was created today.
     def createdCartToday() {
         // Reuse the `sameDay` method.
         // ------------ START EDITING HERE ----------------------
