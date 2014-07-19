@@ -1,5 +1,6 @@
 package workshop
 
+import workshop.model.Car
 import workshop.model.Customer
 
 /**
@@ -8,28 +9,6 @@ import workshop.model.Customer
  * Time: 14:32
  */
 class SyntaxTest extends GroovyTestCase {
-
-    class Car {
-        def position = [0,0]
-        def start() {
-            println "start"
-        }
-
-        def stop() {
-            println "stop"
-        }
-
-        def move(Integer x, Integer y) {
-            println "move $x $y"
-            position[0] += x
-            position[1] += y
-        }
-        def positionAsString() {
-            // ------------ START EDITING HERE ----------------------
-            "${position[0]},${position[1]}"
-            // ------------ STOP EDITING HERE -----------------------
-        }
-    }
 
     void test_01_noSemicolonsNeeded() {
 
@@ -61,11 +40,11 @@ class SyntaxTest extends GroovyTestCase {
         car1.move(5, 6);
         car1.stop();
 
-
         assert car1.position[0] == 12
         assert car1.position[1] == 15
 
         // Groovy allows to omit the parenthesis if there is at least one parameter and no ambiguity
+        // Now start, and move the `car2` and omit the parenthesis where possible.
         def car2 = new Car()
         // ------------ START EDITING HERE ----------------------
         car2.start()
@@ -83,21 +62,24 @@ class SyntaxTest extends GroovyTestCase {
         def car = new Car()
         car.move(4,3)
 
-        // Implement the `positionAsString` method and don't use a `return` statement, it may be omitted.
+        // Implement the `positionAsString` method on the `Car` class and
+        // don't use a `return` statement to make the following assert pass.
         assert car.positionAsString() == "4,3"
     }
 
     void test_04_defaultPropertiesInConstructor() {
-        // Groovy allows the setting of properties directly in the constructor
+        // Groovy allows named parameters in the constructor
         Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")
 
-
+        def customer2
+        // Create a customer using named parameters.
+        // ------------ START EDITING HERE ----------------------
+        customer2 = new Customer(uid: 123, name: 'Jane')
+        // ------------ STOP EDITING HERE -----------------------
+        assert customer2.name == 'Jane'
+        assert customer2.uid == 123
 
     }
-
-
-
-
 
 
 

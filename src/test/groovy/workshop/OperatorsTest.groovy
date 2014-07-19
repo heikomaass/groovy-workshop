@@ -1,22 +1,15 @@
 package workshop
 
+import workshop.model.Cart
+import workshop.model.Customer
+import workshop.model.Spice
+
 /**
  * User: hmaass
  * Date: 17.07.14
  * Time: 16:47
  */
 class OperatorsTest extends GroovyTestCase {
-
-    class Spice {
-        def scoville = 0
-
-        // Add a `plus` implementation
-        // ------------ START EDITING HERE ----------------------
-        def plus(Spice s1) {
-            return new Spice(scoville: s1.scoville + this.scoville)
-        }
-        // ------------ STOP EDITING HERE -----------------------
-    }
 
     void test_01_operatorOverloading() {
         // Operators can be overloaded. See http://groovy.codehaus.org/Operator+Overloading
@@ -30,5 +23,25 @@ class OperatorsTest extends GroovyTestCase {
         // Now add an own `plus` method in the `Spice` class
         Spice combined = peperoni + tabasco + habaneros
         assert combined.scoville == 105500
+    }
+
+    void test_02_safeNavigationOperator() {
+        // Groovy introduced the `Safe Navigation` operator (?.)
+        // which returns an property of an object,
+        // after an automatic null check
+        Customer customer = new Customer()
+        Date created_at = customer?.cart?.created_at
+        assert created_at == null
+
+        // Now create a method on Customer class which uses the `Safe Navigation` feature.
+        // The method should return `true` when the customer has created a cart today.
+
+        Customer hans = new Customer(name: "Hans")
+        hans.cart = new Cart(created_at: new Date())
+
+        Customer peter = new Customer(name: "Peter")
+
+        assertTrue hans.createdCartToday()
+        assertFalse peter.createdCartToday()
     }
 }
