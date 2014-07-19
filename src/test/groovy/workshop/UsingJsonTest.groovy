@@ -1,5 +1,7 @@
 package workshop
 
+import groovy.json.JsonBuilder
+
 /**
  * Created by Max Trense on 03.07.1014
  */
@@ -13,32 +15,58 @@ class UsingJsonTest extends GroovyTestCase {
 			end: '23.08.2014',
 			talks: [
 				[
-					name: 'Groovy',
-					speakers: [
-						[
-							name: 'Heiko Maaß',
-							email: 'heiko.maass@namics.com'
-						], [
-							name: 'Max Trense',
-							email: 'max.trense@namics.com'
-						]
-					]
-				]
+					name: 'Groovy Workshop',
+                    duration: 90
+				],
+                [
+                    name: "Java 8",
+                    duration: 45
+                ]
 			]
 		]
 	]
 
-	void test_01_generateJson() {
-        def json
+	void test_01_generateJsonFromMap() {
+        def builder
 
         // Use the JsonBuilder to create a Json object of the `conferenceData` map.
         // ------------ START EDITING HERE ----------------------
-		def builder = new groovy.json.JsonBuilder(conferenceData)
-		json = builder.toString()
+		builder = new JsonBuilder(conferenceData)
         // ------------ STOP EDITING HERE -----------------------
 
-		assert json.contains('Pforzheim')
-		assert json.contains('Heiko Maa\\u00df')
-		assert json.contains('Max Trense')
+        def json = builder.toString()
+        assert json == /{"conference":{"place":"Pforzheim","start":"21.08.2014","end":"23.08.2014","talks":[{"name":"Groovy Workshop","duration":90},{"name":"Java 8","duration":45}]}}/
 	}
+
+    void test_02_generateJsonWithClosures() {
+        def builder = new JsonBuilder()
+
+        def groovyTalk = new JsonBuilder()
+        groovyTalk {
+            name "Groovy Workshop"
+            duration 90
+        }
+        assert groovyTalk.toString() == /{"name":"Groovy Workshop","duration":90}/
+
+        def javaTalk = new JsonBuilder()
+        javaTalk {
+            name "Java 8"
+            duration 45
+        }
+        assert javaTalk.toString() == /{"name":"Java 8","duration":45}/
+
+        // ------------ START EDITING HERE ----------------------
+        builder.conference {
+            place "Pforzheim"
+            start "21.08.2014"
+            end "23.08.2014"
+            talks groovyTalk.content, javaTalk.content
+        }
+        // ------------ STOP EDITING HERE -----------------------
+
+        def json = builder.toString()
+
+        assert json == /{"conference":{"place":"Pforzheim","start":"21.08.2014","end":"23.08.2014","talks":[{"name":"Groovy Workshop","duration":90},{"name":"Java 8","duration":45}]}}/
+
+    }
 }
