@@ -1,4 +1,4 @@
-package test.workshop
+package workshop
 
 /**
  * Created by Max Trense on 03.07.1014
