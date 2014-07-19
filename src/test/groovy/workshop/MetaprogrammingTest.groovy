@@ -17,7 +17,7 @@ class A {
 }
 
 class B {
-    String customerId
+    Integer customerId
     Integer loginCount;
 
 }
@@ -31,7 +31,7 @@ class MetaprogrammingTest extends GroovyTestCase {
     }
 
     public void test_02_accessingProperties() {
-        def b = new B(customerId: "A123", loginCount: 3);
+        def b = new B(customerId: 123, loginCount: 3);
 
         // Groovy allows to access properties statically as seen below.
         def accessDirectly = b.customerId;
@@ -45,9 +45,32 @@ class MetaprogrammingTest extends GroovyTestCase {
         accessViaDotOperatorWithString = b.'customerId'
         // ------------ STOP EDITING HERE -----------------------
 
-        assert accessDirectly == "A123"
+        assert accessDirectly == 123
         assert accessViaIndexOperatorAndString == accessDirectly
         assert accessViaDotOperatorWithString == accessDirectly
     }
+
+   public void test_03_addMethodToClassAtRuntime() {
+       // Methods can be added at runtime using the MetaClass interface of a Java or Groovy class.
+       B b = new B(customerId: 14, loginCount: 1)
+       b.metaClass.fancyNewMethod = { ->
+           println 'Wow, I was added at runtime'
+       }
+
+       b.fancyNewMethod()
+
+       // Now it's your turn. Add the `increaseLoginCountBy` method, which increases the loginCount
+       // property by the given integer value.
+       // Hint: remeber the `delegate` variable in the closure ? You might need it.
+
+       // ------------ START EDITING HERE ----------------------
+       b.metaClass.increaseLoginCountBy = { Integer i ->
+           delegate.loginCount += i
+       }
+       // ------------ STOP EDITING HERE -----------------------
+       b.increaseLoginCountBy(5)
+       assert b.loginCount == 6
+
+   }
 
 }
