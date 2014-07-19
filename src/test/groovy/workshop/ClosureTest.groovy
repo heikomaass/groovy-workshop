@@ -147,7 +147,5 @@ class ClosureTest extends GroovyTestCase {
             innerClosure()
         }
         outerClosure();
-
     }
-
 }
