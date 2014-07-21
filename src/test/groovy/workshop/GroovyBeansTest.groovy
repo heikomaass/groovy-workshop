@@ -40,5 +40,18 @@ class GroovyBeansTest extends GroovyTestCase {
         assert customer.birthDate == now
     }
 
+    void test_03_defaultPropertiesInConstructor() {
+        // Groovy allows named parameters in the constructor
+        Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")
+
+        def customer2
+        // Create a customer using named parameters.
+        // ------------ START EDITING HERE ----------------------
+        customer2 = new Customer(uid: 123, name: 'Jane')
+        // ------------ STOP EDITING HERE -----------------------
+        assert customer2.name == 'Jane'
+        assert customer2.uid == 123
+
+    }
 
 }
