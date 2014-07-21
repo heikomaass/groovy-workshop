@@ -13,7 +13,7 @@ class StringTest extends GroovyTestCase {
         def welcomeString = ''
         def welcomeGString = ""
 
-        // Set both string, so that the assert statement will succeed.
+        // Set both strings, so that the assert statement will pass.
         // Use the ${expression} syntax when appropriate.
 
         // ------------ START EDITING HERE ----------------------
@@ -68,7 +68,8 @@ class StringTest extends GroovyTestCase {
         for (s in range) {
             output += s
         }
-        // So... what's the output ? Set this variable to true or false
+
+        // So... what's the output ? Set the next variable to true or false
         def iThinkOutputWillBe
 
         // ------------ START EDITING HERE ----------------------
