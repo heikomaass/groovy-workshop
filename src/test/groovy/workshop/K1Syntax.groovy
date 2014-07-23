@@ -8,7 +8,7 @@ import workshop.model.Customer
  * Date: 17.07.14
  * Time: 14:32
  */
-class SyntaxTest extends GroovyTestCase {
+class K1Syntax extends GroovyTestCase {
 
     void test_01_noSemicolonsNeeded() {
 
