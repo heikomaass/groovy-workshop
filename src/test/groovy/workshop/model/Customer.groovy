@@ -13,7 +13,7 @@ class Customer {
 
     Cart cart
 
-    // Fixing GroovyBeansTest: Add setter / getter for birthDate property
+    // Fixing K3GroovyBeans: Add setter / getter for birthDate property
     // ------------ START EDITING HERE ----------------------
     public void setBirthDate(Date date) {
         this.birthDate = date
@@ -24,7 +24,7 @@ class Customer {
     }
     // ------------ STOP EDITING HERE -----------------------
 
-    // Fixing OperatorsTest: Implement createdCartToday method
+    // Fixing K4Operators: Implement createdCartToday method
     // which returns `true` when the cart was created today.
     def createdCartToday() {
         // Reuse the `sameDay` method.

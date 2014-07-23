@@ -3,7 +3,7 @@ package workshop
 /**
  * Created by hmaass on 29.06.14.
  */
-class CollectionsTest extends GroovyTestCase {
+class K6Collections extends GroovyTestCase {
 
     void test_01_sumUpWithEach() {
 

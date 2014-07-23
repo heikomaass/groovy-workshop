@@ -3,7 +3,7 @@ package workshop
 /**
  * Created by hmaass on 05.07.14.
  */
-class ClosureTest extends GroovyTestCase {
+class K5Closures extends GroovyTestCase {
 
     void test_01_usingWith() {
         // The `with` method allows you to do a bunch of things with the same object
@@ -139,7 +139,7 @@ class ClosureTest extends GroovyTestCase {
                 // Now it's your turn. Find out what `owner`, `delegate` and `this` refer to.
                 //
                 // ------------ START EDITING HERE ----------------------
-                assert this instanceof ClosureTest
+                assert this instanceof K5Closures
                 assert owner != this
                 assert owner == delegate
                 // ------------ STOP EDITING HERE -----------------------

@@ -8,7 +8,7 @@ import workshop.model.Customer
  * heavily inspired from http://groovykoans.org/
  */
 
-class GroovyBeansTest extends GroovyTestCase {
+class K3GroovyBeans extends GroovyTestCase {
 
     void test_01_customerHasGeneratedSetter() {
         Customer customer = new Customer(name: "John", email: "JohnDoe@namics.com")

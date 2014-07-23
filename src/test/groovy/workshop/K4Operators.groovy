@@ -9,7 +9,7 @@ import workshop.model.Spice
  * Date: 17.07.14
  * Time: 16:47
  */
-class OperatorsTest extends GroovyTestCase {
+class K4Operators extends GroovyTestCase {
 
     void test_01_operatorOverloading() {
         // Operators can be overloaded. See http://groovy.codehaus.org/Operator+Overloading
@@ -43,5 +43,9 @@ class OperatorsTest extends GroovyTestCase {
 
         assertTrue hans.createdCartToday()
         assertFalse peter.createdCartToday()
+    }
+
+    void test_03_rangeOperator() {
+
     }
 }

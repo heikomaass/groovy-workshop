@@ -67,6 +67,8 @@ class K1Syntax extends GroovyTestCase {
         assert car.positionAsString() == "4,3"
     }
 
+    // TODO: Add test for case statements
+
 
 
 

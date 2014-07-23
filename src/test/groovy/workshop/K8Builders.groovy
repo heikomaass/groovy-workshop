@@ -2,12 +2,18 @@ package workshop
 
 import groovy.json.JsonBuilder
 import groovy.xml.MarkupBuilder
+import groovyx.net.http.HTTPBuilder
+
+import static groovyx.net.http.ContentType.JSON
+import static groovyx.net.http.ContentType.TEXT
+import static groovyx.net.http.Method.GET
+import static groovyx.net.http.Method.GET
 
 /**
  * Created by Max Trense on 03.07.1014
  */
 
-class BuilderTest extends GroovyTestCase {
+class K8Builders extends GroovyTestCase {
 
     def conferenceData = [
             conference: [
@@ -77,4 +83,27 @@ class BuilderTest extends GroovyTestCase {
   </talks>
 </conference>'''
     }
+
+    void test_04_gettingData() {
+        def http = new HTTPBuilder('http://httpbin.org')
+        def responseBody = http.request(GET, TEXT) {
+            // ------------ START EDITING HERE ----------------------
+            uri.path = '/user-agent'
+            headers.'User-Agent' = 'Fancy Useragent'
+            // ------------ STOP EDITING HERE -----------------------
+        }
+        assert responseBody.readLines().join('\n') == '{\n  "user-agent": "Fancy Useragent"\n}'
+    }
+
+    void test_05_gettingJson() {
+        def http = new HTTPBuilder('http://httpbin.org')
+        def json = http.request(GET, JSON) {
+            // ------------ START EDITING HERE ----------------------
+            uri.path = '/user-agent'
+            headers.'User-Agent' = 'Fancy Useragent'
+            // ------------ STOP EDITING HERE -----------------------
+        }
+        assert json."user-agent" == 'Fancy Useragent'
+    }
 }
+
