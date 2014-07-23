@@ -4,7 +4,7 @@ package workshop
  * Created by hmaass on 26.06.14.
  * heavily inspired from http://groovykoans.org/
  */
-class StringTest extends GroovyTestCase {
+class K2StringHandling extends GroovyTestCase {
 
     void test_01_GString_vs_String() {
         def conference = "Namics Conference"
@@ -60,22 +60,19 @@ class StringTest extends GroovyTestCase {
         assert corrected == "Welcome to Namics"
     }
 
-    void test_04_StringRange() {
-        def output = ""
+    void test_04_regexp() {
+        // You can use slashes as string delimiters:
+        def example = /I am a string/
 
-        // We can use the Range operator (..) on Strings
-        def range = "ab".."ad"
-        for (s in range) {
-            output += s
-        }
+        // This is great for regular expressions, because you don't need to escape anything except '/'
+        // Now, make the following asserts
 
-        // So... what's the output ? Set the next variable to true or false
-        def iThinkOutputWillBe
-
+        def pattern
         // ------------ START EDITING HERE ----------------------
-        iThinkOutputWillBe = "abacad"
+        pattern = /\d{4}/
         // ------------ STOP EDITING HERE -----------------------
-
-        assert output == iThinkOutputWillBe
+        // ==~ will create a matcher automatically and checks if the left hand string matches.
+        assert "2008" ==~ pattern
+        assert "2014" ==~ pattern
     }
 }
