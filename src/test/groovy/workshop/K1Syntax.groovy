@@ -37,40 +37,62 @@ class K1Syntax extends GroovyTestCase {
         car1.start();
         car1.move(2, 3);
         car1.move(5, 6);
-        car1.move(5, 6);
         car1.stop();
 
-        assert car1.position[0] == 12
-        assert car1.position[1] == 15
+        assert car1.position[0] == 7
+        assert car1.position[1] == 9
 
         // Groovy allows to omit the parenthesis if there is at least one parameter and no ambiguity
-        // Now start, and move the `car2` and omit the parenthesis where possible.
+        // Now start, and move the `car2` and prevent to use parenthesis where possible.
         def car2 = new Car()
         // ------------ START EDITING HERE ----------------------
         car2.start()
         car2.move 2,3
         car2.move 5,6
-        car2.move 5,6
         car2.stop()
         // ------------ STOP EDITING HERE -----------------------
 
-        assert car2.position[0] == 12
-        assert car2.position[1] == 15
+        assert car2.position[0] == 7
+        assert car2.position[1] == 9
     }
 
     void test_03_noReturnIsNeeded() {
         def car = new Car()
         car.move(4,3)
 
-        // Implement the `positionAsString` method on the `Car` class and
-        // don't use a `return` statement to make the following assert pass.
+        // Navigate to the `Car` class in the `model` package and
+        // implement the `positionAsString` method on the `Car` class.
+        // Prevent to use a `return` statement.
         assert car.positionAsString() == "4,3"
     }
 
-    // TODO: Add test for case statements
+    void test_04_arrayLiterals() {
+        def list
+        // create a list using the [] literal
+        // ------------ START EDITING HERE ----------------------
+        list = [3,2,2,4]
+        // ------------ STOP EDITING HERE -----------------------
+        assert list[0] == 3
+        assert list[3] == 4
+        assert list.size == 4
 
+    }
+    void test_05_accessingMaps() {
+        def map = [
+                cast: [
+                        [name: 'Fred Flintstone', voice_actor: 'Alan Reed'],
+                        [name: 'Barney Rubble', voice_actor: 'Mel Blanc']
+                ]
+        ]
+        def first_actor = ''
+        def second_actor = ''
 
+        // ------------ START EDITING HERE ----------------------
+        first_actor = map.cast[0].voice_actor
+        second_actor = map.cast[1].voice_actor
+        // ------------ STOP EDITING HERE -----------------------
 
-
-
+        assert first_actor == 'Alan Reed'
+        assert second_actor == 'Mel Blanc'
+    }
 }

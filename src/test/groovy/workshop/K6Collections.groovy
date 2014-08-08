@@ -72,26 +72,7 @@ class K6Collections extends GroovyTestCase {
         assert burnedCalories == 2202
     }
 
-    void test_06_accessingMaps() {
-        def map = [
-                cast: [
-                        [name: 'Fred Flintstone', voice_actor: 'Alan Reed'],
-                        [name: 'Barney Rubble', voice_actor: 'Mel Blanc']
-                ]
-        ]
-        def first_actor = ''
-        def second_actor = ''
-
-        // ------------ START EDITING HERE ----------------------
-        first_actor = map.cast[0].voice_actor
-        second_actor = map.cast[1].voice_actor
-        // ------------ STOP EDITING HERE -----------------------
-
-        assert first_actor == 'Alan Reed'
-        assert second_actor == 'Mel Blanc'
-    }
-
-    void test_07_checkMapUsingAny() {
+    void test_06_checkMapUsingAny() {
 
         def cast = [ 'Fred Flintstone' : 'Alan Reed',
                      'Barney Rubble' : 'Mel Blanc',
