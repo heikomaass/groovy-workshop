@@ -11,7 +11,7 @@ dependencies {
     compile files(fileTree(dir:'lib', includes: ['*.jar']))
 
     // compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
-    // compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    // compile 'org.codehaus.groovy:groovy-all:2.3.4'
     // testCompile 'junit:junit:4.11'
 }
 
