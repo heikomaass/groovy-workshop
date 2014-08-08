@@ -2,6 +2,8 @@ package workshop
 
 import groovy.json.JsonBuilder
 import groovy.xml.MarkupBuilder
+import groovyx.net.http.ContentEncoding
+import groovyx.net.http.GZIPEncoding
 import groovyx.net.http.HTTPBuilder
 
 import static groovyx.net.http.ContentType.JSON
@@ -84,26 +86,56 @@ class K8Builders extends GroovyTestCase {
 </conference>'''
     }
 
-    void test_04_gettingData() {
-        def http = new HTTPBuilder('http://httpbin.org')
-        def responseBody = http.request(GET, TEXT) {
-            // ------------ START EDITING HERE ----------------------
-            uri.path = '/user-agent'
-            headers.'User-Agent' = 'Fancy Useragent'
-            // ------------ STOP EDITING HERE -----------------------
-        }
-        assert responseBody.readLines().join('\n') == '{\n  "user-agent": "Fancy Useragent"\n}'
-    }
+    void test_04_gettingJSONWithHTTPBuilder() {
+        // HTTPBuilder allows to create HTTP requests easily.
+        // The next example shows
+        def googleSearch = new HTTPBuilder('http://ajax.googleapis.com')
+        googleSearch.request(GET, JSON) {
+            uri.path = '/ajax/services/search/web'
+            uri.query = [v: '1.0', q: 'Calvin and Hobbes']
+            headers.'User-Agent' = 'Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4'
 
-    void test_05_gettingJson() {
-        def http = new HTTPBuilder('http://httpbin.org')
-        def json = http.request(GET, JSON) {
-            // ------------ START EDITING HERE ----------------------
-            uri.path = '/user-agent'
-            headers.'User-Agent' = 'Fancy Useragent'
-            // ------------ STOP EDITING HERE -----------------------
+            // response handler for a success response code
+            response.success = { resp, json ->
+                println resp.statusLine
+                // parse the JSON response object:
+                json.responseData.results.each {
+                    println "  ${it.titleNoFormatting} : ${it.visibleUrl}"
+                }
+            }
+            response.failure = { resp ->
+                println "Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
+            }
         }
-        assert json."user-agent" == 'Fancy Useragent'
+
+        // Now create your
+        def stackoverflowSearch = new HTTPBuilder("http://api.stackexchange.com/2.2")
+        stackoverflowSearch.setContentEncoding(ContentEncoding.Type.GZIP)
+        stackoverflowSearch.request(GET, JSON) {
+            // Set the path to "/answers" and
+            // Add the url query parameters:
+            // "pagesize" to 10
+            // "site" to "stackoverflow"
+            // "sort" to "activity"
+            // ------------ START EDITING HERE ----------------------
+            uri.path = '/answers'
+            uri.query = [site : "stackoverflow", pagesize: 10, sort:"activity"]
+            // ------------ STOP EDITING HERE -----------------------
+            response.success = { resp, json ->
+                println resp.statusLine
+                println json
+                // fetch the "has_more" property from the json
+                def has_more = false
+                // ------------ START EDITING HERE ----------------------
+
+                // ------------ STOP EDITING HERE -----------------------
+                assert has_more == true
+                assert json.items.size == 10
+            }
+
+            response.failure = { resp ->
+                println "Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
+            }
+        }
     }
 }
-
