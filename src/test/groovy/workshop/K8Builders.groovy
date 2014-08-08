@@ -127,6 +127,7 @@ class K8Builders extends GroovyTestCase {
                 // fetch the "has_more" property from the json
                 def has_more = false
                 // ------------ START EDITING HERE ----------------------
+                has_more = json.has_more
 
                 // ------------ STOP EDITING HERE -----------------------
                 assert has_more == true
