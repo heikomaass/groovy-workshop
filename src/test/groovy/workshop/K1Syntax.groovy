@@ -77,7 +77,24 @@ class K1Syntax extends GroovyTestCase {
         assert list.size == 4
 
     }
-    void test_05_accessingMaps() {
+
+    void test_05_truthy() {
+        def list
+        def string = ""
+        def number = 0
+        // ------------ START EDITING HERE ----------------------
+        list = [3,2,2,4]
+        string = "non empty"
+        number = 1
+        // ------------ STOP EDITING HERE -----------------------
+
+        assert list
+        assert string
+        assert number
+    }
+
+
+    void test_06_accessingMaps() {
         def map = [
                 cast: [
                         [name: 'Fred Flintstone', voice_actor: 'Alan Reed'],
@@ -95,4 +112,6 @@ class K1Syntax extends GroovyTestCase {
         assert first_actor == 'Alan Reed'
         assert second_actor == 'Mel Blanc'
     }
+
+
 }
