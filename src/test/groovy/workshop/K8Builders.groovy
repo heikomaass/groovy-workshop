@@ -38,7 +38,7 @@ class K8Builders extends GroovyTestCase {
 
     void test_02_generateJsonWithClosures() {
         // Now create a json using the closure technique.
-        // For example consider http://beta.groovy-lang.org/docs/latest/html/gapi/groovy/json/JsonBuilder.html
+        // For example consider /groovy-workshop/docs/html/gapi/groovy/json/JsonBuilder.html
         def builder = new JsonBuilder()
         // ------------ START EDITING HERE ----------------------
         builder.conference {
@@ -88,7 +88,11 @@ class K8Builders extends GroovyTestCase {
 
     void test_04_gettingJSONWithHTTPBuilder() {
         // HTTPBuilder allows to create HTTP requests easily.
-        // The next example shows
+        // See /groovy-workshop/docs/html/http-builder-0.7.2-javadoc/index.html
+
+        // Example
+        // -------------------------------------------------------------------------------
+        // The next example shows a GET request to the google search, which returns a JSON
         def googleSearch = new HTTPBuilder('http://ajax.googleapis.com')
         googleSearch.request(GET, JSON) {
             uri.path = '/ajax/services/search/web'
@@ -98,7 +102,7 @@ class K8Builders extends GroovyTestCase {
             // response handler for a success response code
             response.success = { resp, json ->
                 println resp.statusLine
-                // parse the JSON response object:
+                // parse the JSON response object
                 json.responseData.results.each {
                     println "  ${it.titleNoFormatting} : ${it.visibleUrl}"
                 }
@@ -108,7 +112,8 @@ class K8Builders extends GroovyTestCase {
             }
         }
 
-        // Now create your
+        // Now create a JSON request to Stackoverflow
+        // -------------------------------------------------------------------------------
         def stackoverflowSearch = new HTTPBuilder("http://api.stackexchange.com/2.2")
         stackoverflowSearch.setContentEncoding(ContentEncoding.Type.GZIP)
         stackoverflowSearch.request(GET, JSON) {
@@ -135,7 +140,7 @@ class K8Builders extends GroovyTestCase {
             }
 
             response.failure = { resp ->
-                println "Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
+                fail("Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}")
             }
         }
     }
