@@ -79,7 +79,7 @@ class K1Syntax extends GroovyTestCase {
     }
 
     void test_05_truthy() {
-        def list
+        def list = []
         def string = ""
         def number = 0
         // ------------ START EDITING HERE ----------------------
