@@ -46,6 +46,7 @@ class K4Operators extends GroovyTestCase {
     }
 
     void test_03_rangeOperator() {
+        // TODO Max: create test for range operator
 
     }
 }
