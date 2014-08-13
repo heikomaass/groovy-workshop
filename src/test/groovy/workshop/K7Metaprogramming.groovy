@@ -26,7 +26,9 @@ class MetaprogrammingTest extends GroovyTestCase {
     void test_01_methodMissing() {
         A a = new A();
         def hello = a.hello()
+        def banana = a.banana()
         assert hello == "hello"
+        assert banana == "banana"
     }
 
     void test_02_accessingProperties() {
