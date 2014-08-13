@@ -31,27 +31,9 @@ class MetaprogrammingTest extends GroovyTestCase {
         assert banana == "banana"
     }
 
-    void test_02_accessingProperties() {
-        def b = new B(customerId: 123, loginCount: 3);
 
-        // Groovy allows to access properties statically as seen below.
-        def accessDirectly = b.customerId;
 
-        // In addition you can access the properties also dynamically using the index [] and the dot . operator.
-        def accessViaIndexOperatorAndString;
-        def accessViaDotOperatorWithString
-
-        // ------------ START EDITING HERE ----------------------
-        accessViaIndexOperatorAndString = b['customerId']
-        accessViaDotOperatorWithString = b.'customerId'
-        // ------------ STOP EDITING HERE -----------------------
-
-        assert accessDirectly == 123
-        assert accessViaIndexOperatorAndString == accessDirectly
-        assert accessViaDotOperatorWithString == accessDirectly
-    }
-
-    void test_03_addMethodToClassAtRuntime() {
+    void test_02_addMethodToClassAtRuntime() {
         // Methods can be added at runtime using the MetaClass interface of a Java or Groovy class.
         B b = new B(customerId: 14, loginCount: 1)
         b.metaClass.fancyNewMethod = { ->
@@ -73,7 +55,7 @@ class MetaprogrammingTest extends GroovyTestCase {
         assert b.loginCount == 6
     }
 
-    void test_04_addClassAtRuntime() {
+    void test_03_addClassAtRuntime() {
         // Classes can be created at runtime using the `Expando` class
         def smartphone = new Expando(manufactor: "Apple", deviceId: 5)
         smartphone.ring = {
@@ -94,5 +76,25 @@ class MetaprogrammingTest extends GroovyTestCase {
         assert mac.price == 2000;
         assert mac.type == "Notebook"
         assert mac.calculate(1, 2) == 3
+    }
+
+    void test_04_accessingProperties() {
+        def b = new B(customerId: 123, loginCount: 3);
+
+        // Groovy allows to access properties statically as seen below.
+        def accessDirectly = b.customerId;
+
+        // In addition you can access the properties also dynamically using the index [] and the dot . operator.
+        def accessViaIndexOperatorAndString;
+        def accessViaDotOperatorWithString
+
+        // ------------ START EDITING HERE ----------------------
+        accessViaIndexOperatorAndString = b['customerId']
+        accessViaDotOperatorWithString = b.'customerId'
+        // ------------ STOP EDITING HERE -----------------------
+
+        assert accessDirectly == 123
+        assert accessViaIndexOperatorAndString == accessDirectly
+        assert accessViaDotOperatorWithString == accessDirectly
     }
 }
