@@ -30,10 +30,10 @@ class K3GroovyBeans extends GroovyTestCase {
     void test_02_customerAccessModifierDoesntCreateMethods() {
         Customer customer = new Customer(name: "Jane", email: "JaneDoe@namics.com")
 
-        // If the name is declared with an access modifier (public, private or protected) then a field is generated.
-        // and not getter // setter
+        // If the name is declared with an access modifier (public, private or protected) then a field is generated
+        // and no getter or setter methods.
 
-        // In order make the code below pass, go to the `Customer` class and add a setter and getter
+        // In order make the code below pass, go to the `Customer` class and add setter and getter methods.
         def now = new Date()
         customer.setBirthDate(now)
 
