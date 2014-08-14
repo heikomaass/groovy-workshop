@@ -17,12 +17,12 @@ class K2StringHandling extends GroovyTestCase {
         // Use the ${expression} syntax when appropriate.
 
         // ------------ START EDITING HERE ----------------------
-        welcomeString = 'Welcome to ${name}'
+        welcomeString = 'Welcome to ${conference}'
         welcomeGString = "Welcome to ${conference}"
 
         // ------------ STOP EDITING HERE -----------------------
 
-        assert welcomeString == 'Welcome to ${name}'
+        assert welcomeString == 'Welcome to ${conference}'
         assert welcomeGString == "Welcome to Namics Conference"
     }
 
@@ -65,7 +65,7 @@ class K2StringHandling extends GroovyTestCase {
         def example = /I am a string/
 
         // This is great for regular expressions, because you don't need to escape anything except '/'
-        // Now, make the following asserts
+        // Now, make the following asserts pass.
 
         def pattern
         // ------------ START EDITING HERE ----------------------
