@@ -46,7 +46,19 @@ class K4Operators extends GroovyTestCase {
     }
 
     void test_03_rangeOperator() {
-        // TODO Max: create test for range operator
-
+        def range = 0..1
+        def character_range = 'A'..'B'
+        // ------------ START EDITING HERE ----------------------
+        range = 2..6
+        // ------------ STOP EDITING HERE ----------------------
+        assert range.size() == 5
+        assert range[2] == 4
+        
+        // ------------ START EDITING HERE ----------------------
+        character_range = 'A'..<'z'
+        // ------------ STOP EDITING HERE ----------------------
+        assert character_range.contains('[')
+        assert character_range.contains('A')
+        assert ! character_range.contains('z')
     }
 }
