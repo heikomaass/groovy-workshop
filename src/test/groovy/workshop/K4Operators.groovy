@@ -27,13 +27,12 @@ class K4Operators extends GroovyTestCase {
 
     void test_02_safeNavigationOperator() {
         // Groovy introduced the `Safe Navigation` operator (?.)
-        // which returns an property of an object,
-        // after an automatic null check
+        // which returns a property of an object after an automatic null check
         Customer customer = new Customer()
         Date created_at = customer?.cart?.created_at
         assert created_at == null
 
-        // Now create a method on Customer class which uses the `Safe Navigation` feature.
+        // Now create a method on `Customer` class which uses the `Safe Navigation` feature.
         // The method should return `true` when the customer has created a cart today.
 
         Customer hans = new Customer(name: "Hans")
@@ -50,13 +49,13 @@ class K4Operators extends GroovyTestCase {
         def character_range = 'A'..'B'
         // ------------ START EDITING HERE ----------------------
         range = 2..6
-        // ------------ STOP EDITING HERE ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert range.size() == 5
         assert range[2] == 4
-        
+
         // ------------ START EDITING HERE ----------------------
         character_range = 'A'..<'z'
-        // ------------ STOP EDITING HERE ----------------------
+        // ------------ STOP EDITING HERE -----------------------
         assert character_range.contains('[')
         assert character_range.contains('A')
         assert ! character_range.contains('z')
