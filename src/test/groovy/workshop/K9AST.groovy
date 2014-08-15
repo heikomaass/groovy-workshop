@@ -42,4 +42,19 @@ class K9AST extends GroovyTestCase {
 		assert obj?.title == 'Namics Conference'
 	}
 	
+	void test_03_delegationDoesNotChangeAnyTypes() {
+		def nconf = new Event(title: 'Namics Conference', 
+			                    url: 'http://www.namics.com/',
+			                   when: dateFormat.parse('21.08.2014'))
+		def wwdc = new Event(title: 'WWDC 2014', 
+			                    url: 'https://developer.apple.com/wwdc/',
+			                   when: dateFormat.parse('02.06.2014'))
+		assert wwdc.when.before(nconf.when)
+		def obj
+		// ------------ START EDITING HERE ----------------------
+		obj = nconf.when
+		// ------------ STOP EDITING HERE -----------------------
+		assert obj != null && wwdc.before(obj)
+	}
+	
 }
