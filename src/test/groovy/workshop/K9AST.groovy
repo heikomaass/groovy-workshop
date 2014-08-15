@@ -17,4 +17,15 @@ class K9AST extends GroovyTestCase {
 	
 	def dateFormat = new SimpleDateFormat("dd.MM.yyyy")
 	
+	void test_01_synthesizeToString() {
+		def nconf = new Event(title: 'Namics Conference', 
+			                    url: 'http://www.namics.com/',
+			                   when: dateFormat.parse('21.08.2014'))
+		def nconfString = 'workshop.K9AST$Event(Thu Aug 21 00:00:00 CEST 2014, ...)'
+		// ------------ START EDITING HERE ----------------------
+		nconfString = 'workshop.K9AST$Event(Thu Aug 21 00:00:00 CEST 2014, Namics Conference, http://www.namics.com/)'
+		// ------------ STOP EDITING HERE -----------------------
+		assert nconf.toString() == nconfString
+	}
+	
 }
