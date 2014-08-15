@@ -28,4 +28,18 @@ class K9AST extends GroovyTestCase {
 		assert nconf.toString() == nconfString
 	}
 	
+	void test_02_delegationThroughTransformation() {
+		def nconf = new Event(title: 'Namics Conference', 
+			                    url: 'http://www.namics.com/',
+			                   when: dateFormat.parse('21.08.2014'))
+		def today = dateFormat.parse('23.08.2014')
+		assert nconf.when.before(today)
+		def obj
+		// ------------ START EDITING HERE ----------------------
+		obj = nconf
+		// ------------ STOP EDITING HERE -----------------------
+		assert obj?.before(today)
+		assert obj?.title == 'Namics Conference'
+	}
+	
 }
