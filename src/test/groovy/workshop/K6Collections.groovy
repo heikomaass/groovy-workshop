@@ -64,9 +64,12 @@ class K6Collections extends GroovyTestCase {
         def burnedCalories = 0
         def caloriesPerStep = 0.05
 
-        // Use the `inject` method to transform the steps into calories
+        // Use the `inject(Object initialValue, Closure closure)`
+        // method to transform the steps into calories
         // ------------ START EDITING HERE ----------------------
-        burnedCalories = steps.inject(0) { sum, element -> sum += element * caloriesPerStep }
+        burnedCalories = steps.inject(0) { sum, element ->
+            sum + element * caloriesPerStep
+        }
         // ------------ STOP EDITING HERE -----------------------
 
         assert burnedCalories == 2202
@@ -85,6 +88,7 @@ class K6Collections extends GroovyTestCase {
         // use the `any` method to find out if the cast contains a role with `Dino` in the name.
         def castContainsDino;
 
+        // Hint: The closure of the `any` method takes two parameters: key and value
         // ------------ START EDITING HERE ----------------------
         castContainsRubble = cast.any { name, voice_actor ->
             name.contains("Rubble")
