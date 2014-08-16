@@ -1,5 +1,7 @@
 package workshop
 
+import org.codehaus.groovy.runtime.GStringImpl
+
 /**
  * Created by hmaass on 26.06.14.
  * heavily inspired from http://groovykoans.org/
@@ -31,6 +33,9 @@ class K2StringHandling extends GroovyTestCase {
 
         def s1 = "Welcome to ${conference}"
         def s2 = "Welcome to Namics Conference"
+
+        assert s1.class == GStringImpl
+        assert s2.class == String
 
         def equal1 = s1 == s2
         def equal2 = s1.equals(s2)
