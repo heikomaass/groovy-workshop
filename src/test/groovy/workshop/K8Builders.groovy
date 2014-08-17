@@ -60,7 +60,7 @@ class K8Builders extends GroovyTestCase {
 
     void test_03_generateXmlWithClosures() {
         // The MarkupBuilder allows easy XML creation.
-        // For example consider
+        // For example consider /groovy-workshop/docs/html/gapi/groovy/xml/MarkupBuilder.html
         def writer = new StringWriter()
         def builder = new MarkupBuilder(writer)
         // Hint: The MarkupBuilder differs from JsonBuilder by subarray creation.
