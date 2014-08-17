@@ -52,15 +52,18 @@ class K8Builders extends GroovyTestCase {
         def json = builder.toString()
 
         assert json == /{"conference":{"place":"Pforzheim","start":"21.08.2014","end":"23.08.2014","talks":["Groovy Workshop","Java 8"]}}/
-        // The Groovy Builder is great but has one issue: Creation of lists with subobjects
-        // isn't very intuitive see: http://evgeny-goldin.com/blog/groovy-jsonbuilder/
+        // The Groovy Builder is great but has one issue:
+        // Creation of lists with subobjects isn't very intuitive. Consider:
+        // http://evgeny-goldin.com/blog/groovy-jsonbuilder/
+        // http://java.dzone.com/articles/groovy-180-%E2%80%93-meet-jsonbuilder
     }
 
     void test_03_generateXmlWithClosures() {
-        // The MarkupBuilder allows easy XML creation
-        // For example consider http://beta.groovy-lang.org/docs/latest/html/gapi/groovy/xml/MarkupBuilder.html
+        // The MarkupBuilder allows easy XML creation.
+        // For example consider
         def writer = new StringWriter()
         def builder = new MarkupBuilder(writer)
+        // Hint: The MarkupBuilder differs from JsonBuilder by subarray creation.
         // ------------ START EDITING HERE ----------------------
         builder.conference {
             place "Pforzheim"
@@ -89,10 +92,10 @@ class K8Builders extends GroovyTestCase {
     void test_04_gettingJSONWithHTTPBuilder() {
         // HTTPBuilder allows to create HTTP requests easily.
         // See /groovy-workshop/docs/html/http-builder-0.7.2-javadoc/index.html
-
+        // The next example shows a GET request to the google search, which returns a JSON
+        // -------------------------------------------------------------------------------
         // Example
         // -------------------------------------------------------------------------------
-        // The next example shows a GET request to the google search, which returns a JSON
         def googleSearch = new HTTPBuilder('http://ajax.googleapis.com')
         googleSearch.request(GET, JSON) {
             uri.path = '/ajax/services/search/web'
@@ -112,6 +115,7 @@ class K8Builders extends GroovyTestCase {
             }
         }
 
+        // -------------------------------------------------------------------------------
         // Now create a JSON request to Stackoverflow
         // -------------------------------------------------------------------------------
         def stackoverflowSearch = new HTTPBuilder("http://api.stackexchange.com/2.2")
@@ -119,9 +123,9 @@ class K8Builders extends GroovyTestCase {
         stackoverflowSearch.request(GET, JSON) {
             // Set the path to "/answers" and
             // Add the url query parameters:
-            // "pagesize" to 10
-            // "site" to "stackoverflow"
-            // "sort" to "activity"
+            // - "pagesize" to 10
+            // - "site" to "stackoverflow"
+            // - "sort" to "activity"
             // ------------ START EDITING HERE ----------------------
             uri.path = '/answers'
             uri.query = [site : "stackoverflow", pagesize: 10, sort:"activity"]
