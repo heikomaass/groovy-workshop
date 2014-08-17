@@ -1,5 +1,6 @@
 package workshop
 
+
 /**
  * Created by hmaass on 13.07.14.
  */
@@ -25,13 +26,12 @@ class MetaprogrammingTest extends GroovyTestCase {
 
     void test_01_methodMissing() {
         A a = new A();
+        // implement `methodMissing` on class `A`
         def hello = a.hello()
         def banana = a.banana()
         assert hello == "hello"
         assert banana == "banana"
     }
-
-
 
     void test_02_addMethodToClassAtRuntime() {
         // Methods can be added at runtime using the MetaClass interface of a Java or Groovy class.
@@ -78,23 +78,28 @@ class MetaprogrammingTest extends GroovyTestCase {
         assert mac.calculate(1, 2) == 3
     }
 
-    void test_04_accessingProperties() {
-        def b = new B(customerId: 123, loginCount: 3);
+    void test_04_implementTypesUsingMaps() {
 
-        // Groovy allows to access properties statically as seen below.
-        def accessDirectly = b.customerId;
+        // Groovy allows to use a Map to implement any type.
+        def map = [
+                shouldRedirectToOtherHost: { String url -> ! url.contains("namics.com") }
+                // Implement shouldRedirectToHttps
+                // ------------ START EDITING HERE ----------------------
+                ,shouldRedirectToHttps: {String url -> url.startsWith("http://")}
+                // ------------ STOP EDITING HERE -----------------------
+        ]
 
-        // In addition you can access the properties also dynamically using the index [] and the dot . operator.
-        def accessViaIndexOperatorAndString;
-        def accessViaDotOperatorWithString
+        // The `as` operator marks the map as a type of `RedirectStrategy`.
+        RedirectStrategy strategy = map as RedirectStrategy
+        assertFalse strategy.shouldRedirectToOtherHost("http://www.namics.com")
+        assertTrue strategy.shouldRedirectToOtherHost("http://www.google.com")
 
-        // ------------ START EDITING HERE ----------------------
-        accessViaIndexOperatorAndString = b['customerId']
-        accessViaDotOperatorWithString = b.'customerId'
-        // ------------ STOP EDITING HERE -----------------------
-
-        assert accessDirectly == 123
-        assert accessViaIndexOperatorAndString == accessDirectly
-        assert accessViaDotOperatorWithString == accessDirectly
+        assertTrue strategy.shouldRedirectToHttps("http://www.namics.com")
+        assertFalse strategy.shouldRedirectToHttps("https://www.namics.com")
     }
+}
+
+interface RedirectStrategy {
+    boolean shouldRedirectToOtherHost(String url)
+    boolean shouldRedirectToHttps(String url)
 }

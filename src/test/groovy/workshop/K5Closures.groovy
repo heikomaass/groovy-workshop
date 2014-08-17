@@ -72,11 +72,22 @@ class K5Closures extends GroovyTestCase {
         assert result == resultFromRewrittenClosure
     }
 
+    class A {
+        def message() {
+            return "A"
+        }
+    }
+
+    class B {
+        def message() {
+            return "B"
+        }
+    }
     void test_04_switchingDelegate_1() {
         // Closures come with three properties:
         // this:        instance of enclosing class, where the Closure is defined
         // owner:       enclosing object (`this` or surrounding Closure)
-        // delegate:    defaults to `owner, but is changeable
+        // delegate:    defaults to `owner` but is changeable
         def result = "";
 
         def closure = {
@@ -98,23 +109,15 @@ class K5Closures extends GroovyTestCase {
         assert result == "A"
     }
 
-    class A {
-        def message() {
-            return "A"
-        }
-    }
-
-    class B {
-        def message() {
-            return "B"
-        }
-    }
 
     void test_05_switchingDelegate_2() {
         def data = [x: 10, y: 20]
+
+        // This closure refers to non-existing variables.
         def closure = {
             y = x + y
         }
+        // You can fix this, when you set the delegate to an object which provide these variables.
         // ------------ START EDITING HERE ----------------------
         closure.delegate = data
         // ------------ STOP EDITING HERE -----------------------
@@ -125,7 +128,6 @@ class K5Closures extends GroovyTestCase {
 
     void test_06_nestingClosure() {
         def outerClosure = {
-            def banana = 0;
             // `this` refers to the `ClosureTest` instance.
             // and it is the owner of the outerClosure.
             assert owner == this
@@ -135,11 +137,13 @@ class K5Closures extends GroovyTestCase {
             // if they are not provided in the closure itself.
             assert owner == delegate
 
+
             def innerClosure = {
                 // Now it's your turn. Find out what `owner`, `delegate` and `this` refer to.
                 //
                 // ------------ START EDITING HERE ----------------------
                 assert this instanceof K5Closures
+                assert owner instanceof Closure
                 assert owner != this
                 assert owner == delegate
                 // ------------ STOP EDITING HERE -----------------------
