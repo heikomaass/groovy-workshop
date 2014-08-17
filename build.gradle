@@ -29,7 +29,7 @@ task removeSolutions(dependsOn:copySourceToSolutions) << {
     def solutionRegex = $/(?sm)(// -{12} START EDITING HERE -{22})(.*?)(\s+// -{12} STOP EDITING HERE -{23})/$
     sourceSets.test.allSource.files.each { File sourceFile ->
         solutionsRemoved += (sourceFile.text =~ solutionRegex).count
-        sourceFile.text = sourceFile.text.replaceAll(solutionRegex, '$1\n\n$3')
+        sourceFile.text = sourceFile.text.replaceAll(solutionRegex, '$1\n$3')
     }
     println "Removed $solutionsRemoved solutions from Groovy Workshop."
 }
