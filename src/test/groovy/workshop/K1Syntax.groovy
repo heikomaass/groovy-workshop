@@ -117,10 +117,10 @@ class K1Syntax extends GroovyTestCase {
         assert applySwitch("abc") == 1
         assert applySwitch("def") == 1
         
-        assert applySwitch(4) == 0
+        assert applySwitch(4) == 3
         assert applySwitch(5) == 2
         assert applySwitch(10) == 2
-        assert applySwitch(11) == 0
+        assert applySwitch(11) == 3
         
         assert applySwitch('123456') == 3
         assert applySwitch('467317') == 3
@@ -129,12 +129,12 @@ class K1Syntax extends GroovyTestCase {
     int applySwitch(arg) {
         switch (arg) {
             // ------------ START EDITING HERE ----------------------
-            case /\d+/:
+            case 5..10:
+                return 2
+            case ~/^\d+$/:
                 return 3
             case String:
                 return 1
-            case 5..10:
-                return 2
             // ------------ STOP EDITING HERE -----------------------
             default:
                 return 0
