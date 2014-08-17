@@ -25,13 +25,12 @@ class MetaprogrammingTest extends GroovyTestCase {
 
     void test_01_methodMissing() {
         A a = new A();
+        // implement `methodMissing` on class `A`
         def hello = a.hello()
         def banana = a.banana()
         assert hello == "hello"
         assert banana == "banana"
     }
-
-
 
     void test_02_addMethodToClassAtRuntime() {
         // Methods can be added at runtime using the MetaClass interface of a Java or Groovy class.
