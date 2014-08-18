@@ -1,4 +1,6 @@
-SET PATH=%CD%\install\gradle-2.0\bin;%PATH%
+SET KOAN_PATH=%CD%
+
+SET PATH=%KOAN_PATH%\install\gradle-2.0\bin;%PATH%
 
 echo "PATH set for gradle invocation"
 echo "  $KOAN_PATH/install/gradle-2.0/bin"
