@@ -3,9 +3,6 @@ build
 out
 *~
 .gradle
-*.iml
-*.ipr
-*.iws
 .idea
 .*.swp
 *.class
