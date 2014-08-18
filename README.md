@@ -19,14 +19,7 @@ but provides a slightly different structure and scope.
 
 Groovy 2.3.3 already comes as jar-file in the `/lib` folder
 
-### 3. Create IntelliJ project
-Create an IntelliJ project using this gradle command 
-
-    gradle idea
-
-After that you can open this project folder in IntelliJ.
-
-### 4. Remove solutions
+### 3. Remove solutions
 Before you start the workshop please remove the solutions in the code.
 Just execute
 
@@ -34,7 +27,7 @@ Just execute
     
 The solutions for the tests are copied into `output/solutions`.
 
-### 5. Execute tests
+### 4. Execute tests
 In order to start the tests you may use gradle.
 
     gradle test
@@ -42,7 +35,7 @@ In order to start the tests you may use gradle.
 In IntelliJ you can right click on the `src/test` folder and choose `Run All Tests`.
 ![Run all tests](./img/run_all_tests.png)
 
-### 6. Fix tests
+### 5. Fix tests
 Make the tests pass.
 
 
