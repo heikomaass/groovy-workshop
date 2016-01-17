@@ -6,6 +6,8 @@ So this workshop will allow you to learn Groovy syntax and concepts by making te
 Please note that this workshop is heavily inspired by the [Groovy Koans](http://groovykoans.org/),
 but provides a slightly different structure and scope.
 
+The (german) slides for this workshop are available here: [ Presentation ](/groovy-workshop-hma-mtre-2014-08-23.pdf)
+
 ## Installation
 
 ### 1. Install Gradle
